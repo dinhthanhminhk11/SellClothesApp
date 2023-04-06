@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <TextView
@@ -32,7 +33,33 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:text="Chào mừng bạn đến với Man Official Fashion, Hãy mua sắm!"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@+id/btnStart"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_ui"
+            android:text="Đăng nhập"
+            android:textAllCaps="false"
             android:textColor="@color/white"
-             />
+            app:backgroundTint="@null" />
+
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="82dp"
+            android:text="Đăng kí"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

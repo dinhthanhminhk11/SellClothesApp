@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sellclothesapp.R;
 import com.example.sellclothesapp.databinding.FragmentHomeBinding;
 import com.example.sellclothesapp.model.Category;
+import com.example.sellclothesapp.model.Product;
 import com.example.sellclothesapp.ui.adapter.CategoryAdapter;
+import com.example.sellclothesapp.ui.adapter.ProductAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     private List<Category> categoryList;
+    private List<Product> productsList;
 
     public HomeFragment() {
 
@@ -54,8 +58,22 @@ public class HomeFragment extends Fragment {
         categoryList.add(new Category(1, "Váy", R.drawable.dress_svgrepo_com));
         categoryList.add(new Category(1, "Đầm", R.drawable.dress_svgrepo_com__1_));
 
+
+        productsList = new ArrayList<>();
+        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
+        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
+        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
+        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
+        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
+        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
+        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
+
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList);
         binding.listCategoryHomeFragment.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         binding.listCategoryHomeFragment.setAdapter(categoryAdapter);
+
+        ProductAdapter productAdapter = new ProductAdapter(productsList);
+        binding.listProduct.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        binding.listProduct.setAdapter(productAdapter);
     }
 }

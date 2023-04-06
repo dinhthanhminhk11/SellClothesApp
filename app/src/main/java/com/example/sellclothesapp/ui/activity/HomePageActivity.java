@@ -2,11 +2,10 @@ package com.example.sellclothesapp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sellclothesapp.MainActivity;
 import com.example.sellclothesapp.databinding.ActivityHomePageBinding;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -18,13 +17,19 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        new Handler().postDelayed(new Runnable() {
+
+        binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+            public void onClick(View view) {
+                startActivity(new Intent(HomePageActivity.this, LoginActivity.class));
             }
-        }, 3000);
+        });
+
+        binding.register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomePageActivity.this, RegisterActivity.class));
+            }
+        });
     }
 }

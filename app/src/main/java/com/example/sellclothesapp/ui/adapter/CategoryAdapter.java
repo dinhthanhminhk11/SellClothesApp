@@ -42,16 +42,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             if (selected) {
                 if (position == 0) {
                     holder.itemView.setBackgroundResource(R.drawable.back_ground_item_select);
-                    holder.itemCategoryHomefragmentBinding.image.setColorFilter(Color.BLACK);
-                    holder.itemCategoryHomefragmentBinding.name.setTextColor(Color.BLACK);
+                    holder.itemCategoryHomefragmentBinding.image.setColorFilter(Color.WHITE);
+                    holder.itemCategoryHomefragmentBinding.name.setTextColor(Color.WHITE);
                     holder.itemCategoryHomefragmentBinding.name.setTypeface(null, Typeface.BOLD);
                 }
                 selected = false;
             } else {
                 if (row_index == position) {
                     holder.itemView.setBackgroundResource(R.drawable.back_ground_item_select);
-                    holder.itemCategoryHomefragmentBinding.image.setColorFilter(Color.BLACK);
-                    holder.itemCategoryHomefragmentBinding.name.setTextColor(Color.BLACK);
+                    holder.itemCategoryHomefragmentBinding.image.setColorFilter(Color.WHITE);
+                    holder.itemCategoryHomefragmentBinding.name.setTextColor(Color.WHITE);
                     holder.itemCategoryHomefragmentBinding.name.setTypeface(null, Typeface.BOLD);
                 } else {
                     holder.itemView.setBackgroundColor(Color.TRANSPARENT);

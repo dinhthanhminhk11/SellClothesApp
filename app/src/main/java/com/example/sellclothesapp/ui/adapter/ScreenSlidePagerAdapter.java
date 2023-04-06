@@ -25,8 +25,6 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return new CartFragment();
             case 3:
-                return new NotificationFragment();
-            case 4:
                 return new AccountFragment();
             default:
                 return new HomeFragment();
@@ -35,6 +33,6 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
 }

@@ -61,16 +61,6 @@
             app:bt_title="Giỏ hàng" />
 
         <com.example.sellclothesapp.ui.customview.bottomnavigtion.BubbleToggleView
-            android:id="@+id/notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bt_colorActive="@color/blue_grey_active"
-            app:bt_colorInactive="@color/white"
-            app:bt_icon="@drawable/round_notifications_24"
-            app:bt_shape="@drawable/transition_background_drawable_home"
-            app:bt_title="Thông báo" />
-
-        <com.example.sellclothesapp.ui.customview.bottomnavigtion.BubbleToggleView
             android:id="@+id/person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

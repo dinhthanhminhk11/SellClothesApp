@@ -24,15 +24,12 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ArrayList<Fragment> fragList = new ArrayList<>();
-
         ScreenSlidePagerAdapter pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         binding.bottomNavigationViewLinear.setTypeface(Typeface.createFromAsset(getAssets(), "rubik.ttf"));
         binding.bottomNavigationViewLinear.setBadgeValue(0, null);
         binding.bottomNavigationViewLinear.setBadgeValue(1, null); //invisible badge
         binding.bottomNavigationViewLinear.setBadgeValue(2, null);
-        binding.bottomNavigationViewLinear.setBadgeValue(3, "");
-        binding.bottomNavigationViewLinear.setBadgeValue(4, null); //empty badge
+        binding.bottomNavigationViewLinear.setBadgeValue(3, null); //empty badge
         binding.viewPager.setAdapter(pagerAdapter);
 
         binding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
