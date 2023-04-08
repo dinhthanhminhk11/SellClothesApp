@@ -8,13 +8,23 @@ public class Product {
     private float price;
     private float start;
 
-    public Product(int id, String name, String nameCategory, String image, float price, float start) {
+    private String size;
+
+    private String color;
+
+    public Product(int id, String name, String nameCategory, String image, float price, float start, String size, String color) {
         this.id = id;
         this.name = name;
         this.nameCategory = nameCategory;
         this.image = image;
         this.price = price;
         this.start = start;
+        this.size = size;
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public int getId() {
@@ -63,5 +73,13 @@ public class Product {
 
     public void setStart(float start) {
         this.start = start;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

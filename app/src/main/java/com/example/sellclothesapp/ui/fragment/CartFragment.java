@@ -1,21 +1,35 @@
 package com.example.sellclothesapp.ui.fragment;
 
+import static com.example.sellclothesapp.ui.fragment.HomeFragment.productsList;
+
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.sellclothesapp.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.example.sellclothesapp.databinding.FragmentCartBinding;
+import com.example.sellclothesapp.model.Product;
+import com.example.sellclothesapp.ui.adapter.CardAdapter;
+
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CardAdapter.Callback {
+    private DecimalFormat decimalFormat = new DecimalFormat("#.#");
+    private FragmentCartBinding binding;
+    private CardAdapter cardAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,9 +72,43 @@ public class CartFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        binding = FragmentCartBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView();
+    }
+
+    private void initView() {
+        binding.listCard.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        cardAdapter = new CardAdapter(productsList);
+        cardAdapter.setCallback(this);
+        binding.listCard.setAdapter(cardAdapter);
+    }
+
+    @Override
+    public void onClick(String id) {
+
+    }
+
+    @Override
+    public void callSum(HashMap<Product, Integer> cartMap) {
+        binding.countCard.setText("Mặt hàng (" + cartMap.size() + " mặt hàng)");
+        double sum = 0;
+        Set<Map.Entry<Product, Integer>> entries = cartMap.entrySet();
+        for (Map.Entry<Product, Integer> entry : entries) {
+            Product key = entry.getKey();
+            Integer value = entry.getValue();
+            sum += (key.getPrice() * value);
+        }
+
+        binding.countCardPrice.setText(decimalFormat.format(sum) + " $");
+        binding.sumPrice.setText(decimalFormat.format(sum + (sum * 0.1)) + " $");
+
     }
 }

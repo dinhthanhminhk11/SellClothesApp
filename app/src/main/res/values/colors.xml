@@ -44,4 +44,6 @@
 
     <color name="white">#ffffff</color>
     <color name="colorbackground">#F5F5F5</color>
+    <color name="colorCCCCCC">#CCCCCC</color>
+    <color name="color4CAF50">#4CAF50</color>
 </resources>

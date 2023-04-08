@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     private List<Category> categoryList;
-    private List<Product> productsList;
+    public static List<Product> productsList;
 
     public HomeFragment() {
 
@@ -60,13 +60,13 @@ public class HomeFragment extends Fragment {
 
 
         productsList = new ArrayList<>();
-        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
-        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
-        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
-        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
-        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
-        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
-        productsList.add(new Product(1, "áo thun", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f));
+        productsList.add(new Product(1, "áo thun 1", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
+        productsList.add(new Product(1, "áo thun 2", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
+        productsList.add(new Product(1, "áo thun 3", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
+        productsList.add(new Product(1, "áo thun 4", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
+        productsList.add(new Product(1, "áo thun 5", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
+        productsList.add(new Product(1, "áo thun 6", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
+        productsList.add(new Product(1, "áo thun 7", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList);
         binding.listCategoryHomeFragment.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
