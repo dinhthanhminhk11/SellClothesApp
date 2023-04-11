@@ -56,21 +56,34 @@ public class Controller {
         this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
         String sql = "select * from " + AppConstant.TABLE_PRODUCT;
         Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
-
         Product product;
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                product = new Product(
-                        Integer.parseInt(cursor.getString(0),
-                        cursor.getString(2),
-                                Integer.parseInt(cursor.getString(1)==1 ?"Áo": (Integer.parseInt(cursor.getString(1)==2) :,
+                product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(1)) == 1 ? "Áo" : Integer.parseInt(cursor.getString(1)) == 2 ? "Quần" : Integer.parseInt(cursor.getString(1)) == 3 ? "Váy" : "Đầm", cursor.getString(6), cursor.getInt(4), cursor.getInt(3), cursor.getString(5)
 
                 );
                 list.add(product);
                 cursor.moveToNext();
             }
         }
+        cursor.close();
+        this.sqLiteDatabase.close();
+        return list;
+    }
 
+    public List<Product> getListProductByCategory(int id) {
+        List<Product> list = new ArrayList<Product>();
+        this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
+        String sql = "select * from " + AppConstant.TABLE_PRODUCT + " where " + AppConstant.PRODUCT_ID_CATEGORY + " ='" + id + "'";
+        Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
+        Product product;
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(1)) == 1 ? "Áo" : Integer.parseInt(cursor.getString(1)) == 2 ? "Quần" : Integer.parseInt(cursor.getString(1)) == 3 ? "Váy" : "Đầm", cursor.getString(6), cursor.getInt(4), cursor.getInt(3), cursor.getString(5));
+                list.add(product);
+                cursor.moveToNext();
+            }
+        }
         cursor.close();
         this.sqLiteDatabase.close();
         return list;

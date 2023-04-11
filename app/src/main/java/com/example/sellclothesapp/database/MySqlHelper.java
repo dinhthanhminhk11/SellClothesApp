@@ -26,6 +26,13 @@ public class MySqlHelper extends SQLiteOpenHelper {
                 AppConstant.PRODUCT_IMAGE + " text not null" + ")";
         sqLiteDatabase.execSQL(sql);
 
+        sql = "create table " + AppConstant.TABLE_BOOKMARK + "(" +
+                AppConstant.BOOKMARK_ID + " integer primary key, " +
+                AppConstant.BOOKMARK_ID_USER + " integer not null, " +
+                AppConstant.BOOKMARK_ID_PRODUCT + " integer not null" +
+                ")";
+        sqLiteDatabase.execSQL(sql);
+
 // váy là id là 3
         // áo là 1
         // quần là 2

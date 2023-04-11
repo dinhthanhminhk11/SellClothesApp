@@ -22,6 +22,13 @@ public interface AppConstant {
     String PRODUCT_MORE = "PRODUCTMORE";
     String PRODUCT_IMAGE = "PRODUCTIMAGE";
 
+    //=======================================
+
+    String TABLE_BOOKMARK = "BOOKMARK";
+    String BOOKMARK_ID = "BOOKMARKID";
+    String BOOKMARK_ID_PRODUCT = "BOOKMARKIDPRODUCT";
+    String BOOKMARK_ID_USER = "BOOKMARKIDUSER";
+
 
 
 }

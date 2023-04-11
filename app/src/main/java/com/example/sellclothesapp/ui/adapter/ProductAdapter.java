@@ -1,6 +1,7 @@
 package com.example.sellclothesapp.ui.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,23 @@ import com.example.sellclothesapp.model.Product;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private List<Product> data;
-    private DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
-    public ProductAdapter(List<Product> data) {
+    private Consumer<Product> consumer;
+    private DecimalFormat decimalFormat = new DecimalFormat("#.#");
+    private boolean isClickSpeed = true;
+
+    public ProductAdapter(Consumer<Product> consumer, Callback callback) {
+        this.consumer = consumer;
+        this.callback = callback;
+    }
+
+    private Callback callback;
+
+    public void setData(List<Product> data) {
         this.data = data;
     }
 
@@ -39,6 +51,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             holder.itemProductBinding.name.setText(product.getName());
             holder.itemProductBinding.price.setText(decimalFormat.format(product.getPrice()) + " $");
             holder.itemProductBinding.nameCategory.setText(product.getNameCategory());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    consumer.accept(product);
+                }
+            });
+
+            holder.itemProductBinding.btnFavor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isClickSpeed) {
+                        callback.addBookmark(product.getId());
+                        holder.itemProductBinding.imageFavorite.setImageResource(R.drawable.ic_favorite_full);
+                        isClickSpeed = false;
+                    } else {
+                        callback.deleteBookmark(product.getId());
+                        holder.itemProductBinding.imageFavorite.setImageResource(R.drawable.ic_favorite_border_24);
+                        isClickSpeed = true;
+                    }
+                }
+            });
         }
     }
 
@@ -54,5 +87,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             super(biding.getRoot());
             itemProductBinding = biding;
         }
+    }
+
+    public interface Callback {
+        void deleteBookmark(int id);
+
+        void addBookmark(int id);
     }
 }

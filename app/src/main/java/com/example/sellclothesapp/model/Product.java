@@ -1,6 +1,8 @@
 package com.example.sellclothesapp.model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private int id;
     private String name;
     private String nameCategory;
@@ -12,12 +14,17 @@ public class Product {
 
     private String color;
 
-    public Product(int id, String name, String nameCategory, String image, float price) {
+    private int countFeedback;
+    private String more;
+
+    public Product(int id, String name, String nameCategory, String image, float price , int countFeedback , String more) {
         this.id = id;
         this.name = name;
         this.nameCategory = nameCategory;
         this.image = image;
         this.price = price;
+        this.countFeedback = countFeedback;
+        this.more = more;
     }
 
     public Product(int id, String name, String nameCategory, String image, float price, float start, String size, String color) {
@@ -89,5 +96,13 @@ public class Product {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public int getCountFeedback() {
+        return countFeedback;
+    }
+
+    public String getMore() {
+        return more;
     }
 }

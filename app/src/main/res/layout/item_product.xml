@@ -21,6 +21,7 @@
             android:src="@drawable/imagebackground" />
 
         <LinearLayout
+            android:id="@+id/btnFavor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -29,6 +30,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/imageFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

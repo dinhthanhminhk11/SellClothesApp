@@ -21,9 +21,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private boolean selected = true;
     private boolean check = true;
     private List<Category> data;
+    private Callback callback;
 
-    public CategoryAdapter(List<Category> data) {
+    public CategoryAdapter(List<Category> data, Callback callback) {
         this.data = data;
+        this.callback = callback;
     }
 
     @NonNull
@@ -41,6 +43,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
             if (selected) {
                 if (position == 0) {
+                    callback.callbackCLick(0);
                     holder.itemView.setBackgroundResource(R.drawable.back_ground_item_select);
                     holder.itemCategoryHomefragmentBinding.image.setColorFilter(Color.WHITE);
                     holder.itemCategoryHomefragmentBinding.name.setTextColor(Color.WHITE);
@@ -66,6 +69,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     row_index = position;
+                    callback.callbackCLick(position);
                     notifyDataSetChanged();
                 }
             });
@@ -87,5 +91,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     public interface Callback {
+        void callbackCLick(int position);
     }
 }
