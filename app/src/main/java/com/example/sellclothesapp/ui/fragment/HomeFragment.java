@@ -15,6 +15,7 @@ import com.example.sellclothesapp.R;
 import com.example.sellclothesapp.databinding.FragmentHomeBinding;
 import com.example.sellclothesapp.model.Category;
 import com.example.sellclothesapp.model.Product;
+import com.example.sellclothesapp.model.User;
 import com.example.sellclothesapp.ui.adapter.CategoryAdapter;
 import com.example.sellclothesapp.ui.adapter.ProductAdapter;
 
@@ -48,6 +49,11 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
+        initData();
+    }
+
+    private void initData() {
+        binding.nameUser.setText(User.getInstance().getName());
     }
 
     private void initView() {

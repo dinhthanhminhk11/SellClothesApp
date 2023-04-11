@@ -7,7 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sellclothesapp.constants.AppConstant;
 import com.example.sellclothesapp.database.MySqlHelper;
+import com.example.sellclothesapp.model.Product;
 import com.example.sellclothesapp.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     private MySqlHelper mySqlHelper;
@@ -45,6 +49,31 @@ public class Controller {
         contentValues.put(AppConstant.USER_ADDRESS, user.getAddress());
         long result = this.sqLiteDatabase.insert(AppConstant.TABLE_USER, null, contentValues);
         return result > 0;
+    }
+
+    public List<Product> getAllListProduct() {
+        List<Product> list = new ArrayList<Product>();
+        this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
+        String sql = "select * from " + AppConstant.TABLE_PRODUCT;
+        Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
+
+        Product product;
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                product = new Product(
+                        Integer.parseInt(cursor.getString(0),
+                        cursor.getString(2),
+                                Integer.parseInt(cursor.getString(1)==1 ?"Áo": (Integer.parseInt(cursor.getString(1)==2) :,
+
+                );
+                list.add(product);
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+        this.sqLiteDatabase.close();
+        return list;
     }
 
 }

@@ -20,5 +20,8 @@ public interface AppConstant {
     String PRODUCT_COLOR = "PRODUCTCOLOR";
     String PRODUCT_SIZE = "PRODUCTSIZE";
     String PRODUCT_MORE = "PRODUCTMORE";
+    String PRODUCT_IMAGE = "PRODUCTIMAGE";
+
+
 
 }

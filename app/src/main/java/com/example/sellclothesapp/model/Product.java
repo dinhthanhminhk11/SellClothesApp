@@ -12,6 +12,14 @@ public class Product {
 
     private String color;
 
+    public Product(int id, String name, String nameCategory, String image, float price) {
+        this.id = id;
+        this.name = name;
+        this.nameCategory = nameCategory;
+        this.image = image;
+        this.price = price;
+    }
+
     public Product(int id, String name, String nameCategory, String image, float price, float start, String size, String color) {
         this.id = id;
         this.name = name;
