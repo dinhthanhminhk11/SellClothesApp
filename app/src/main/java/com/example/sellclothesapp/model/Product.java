@@ -17,6 +17,9 @@ public class Product implements Serializable {
     private int countFeedback;
     private String more;
 
+    public Product() {
+    }
+
     public Product(int id, String name, String nameCategory, String image, float price , int countFeedback , String more) {
         this.id = id;
         this.name = name;

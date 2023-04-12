@@ -1,5 +1,6 @@
 package com.example.sellclothesapp.ui.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sellclothesapp.R;
+import com.example.sellclothesapp.dao.Controller;
 import com.example.sellclothesapp.databinding.ItemProductBinding;
+import com.example.sellclothesapp.model.Bookmark;
 import com.example.sellclothesapp.model.Product;
+import com.example.sellclothesapp.model.User;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -23,10 +27,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private Consumer<Product> consumer;
     private DecimalFormat decimalFormat = new DecimalFormat("#.#");
     private boolean isClickSpeed = true;
+    private Controller controller;
 
-    public ProductAdapter(Consumer<Product> consumer, Callback callback) {
+    public ProductAdapter(Context context, Consumer<Product> consumer, Callback callback) {
         this.consumer = consumer;
         this.callback = callback;
+        controller = new Controller(context);
     }
 
     private Callback callback;
@@ -57,6 +63,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     consumer.accept(product);
                 }
             });
+
+            Bookmark bookmark = controller.getBookmarkByIdUserAndIdProduct(product.getId(), User.getInstance().getId());
+            if (bookmark != null) {
+                holder.itemProductBinding.imageFavorite.setImageResource(R.drawable.ic_favorite_full);
+                isClickSpeed = false;
+            } else {
+                holder.itemProductBinding.imageFavorite.setImageResource(R.drawable.ic_favorite_border_24);
+                isClickSpeed = true;
+            }
 
             holder.itemProductBinding.btnFavor.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -22,7 +22,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private boolean check = true;
     private List<Category> data;
     private Callback callback;
-
     public CategoryAdapter(List<Category> data, Callback callback) {
         this.data = data;
         this.callback = callback;

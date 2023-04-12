@@ -16,6 +16,7 @@ import com.example.sellclothesapp.R;
 import com.example.sellclothesapp.constants.AppConstant;
 import com.example.sellclothesapp.dao.Controller;
 import com.example.sellclothesapp.databinding.FragmentHomeBinding;
+import com.example.sellclothesapp.model.Bookmark;
 import com.example.sellclothesapp.model.Category;
 import com.example.sellclothesapp.model.Product;
 import com.example.sellclothesapp.model.User;
@@ -87,7 +88,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Callback, 
         binding.listCategoryHomeFragment.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         binding.listCategoryHomeFragment.setAdapter(categoryAdapter);
 
-        productAdapter = new ProductAdapter(new Consumer<Product>() {
+        productAdapter = new ProductAdapter(getActivity(),new Consumer<Product>() {
             @Override
             public void accept(Product product) {
                 Intent intent = new Intent(getActivity(), DetailProductActivity.class);
@@ -121,11 +122,11 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Callback, 
 
     @Override
     public void deleteBookmark(int id) {
-
+        controller.addBookmark(new Bookmark(0, id, User.getInstance().getId()));
     }
 
     @Override
     public void addBookmark(int id) {
-
+        controller.addBookmark(new Bookmark(0, id, User.getInstance().getId()));
     }
 }

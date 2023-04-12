@@ -22,6 +22,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.name.setText("Minh dinh");
+        binding.email.setText("dinhthanhminhk11@gmail.com");
+        binding.phone.setText("0375784487");
+        binding.password.setText("123456");
+        binding.address.setText("Ninh Giang hải dương");
         controller = new Controller(this);
         binding.btnEnd.setOnClickListener(new View.OnClickListener() {
             @Override

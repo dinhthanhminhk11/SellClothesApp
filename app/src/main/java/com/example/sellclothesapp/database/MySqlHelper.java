@@ -13,7 +13,13 @@ public class MySqlHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql = "create table " + AppConstant.TABLE_USER + "(" + AppConstant.USER_ID + " integer primary key, " + AppConstant.USER_NAME + " text not null," + AppConstant.USER_EMAIL + " text not null," + AppConstant.USER_PHONE + " text not null," + AppConstant.USER_PASSWORD + " text not null," + AppConstant.USER_ADDRESS + " text not null" + ")";
+        String sql = "create table " + AppConstant.TABLE_USER + "(" +
+                AppConstant.USER_ID + " integer primary key, " +
+                AppConstant.USER_NAME + " text not null," +
+                AppConstant.USER_EMAIL + " text not null," +
+                AppConstant.USER_PHONE + " text not null," +
+                AppConstant.USER_PASSWORD + " text not null," +
+                AppConstant.USER_ADDRESS + " text not null" + ")";
         sqLiteDatabase.execSQL(sql);
 
         sql = "create table " + AppConstant.TABLE_PRODUCT + "(" +
