@@ -10,7 +10,7 @@ public class Product implements Serializable {
     private float price;
     private float start;
 
-    private String size;
+    private int size;
 
     private String color;
 
@@ -20,7 +20,18 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(int id, String name, String nameCategory, String image, float price , int countFeedback , String more) {
+    public Product(int id, String name, String nameCategory, String image, float price, int countFeedback, String more, int size) {
+        this.id = id;
+        this.name = name;
+        this.nameCategory = nameCategory;
+        this.image = image;
+        this.price = price;
+        this.countFeedback = countFeedback;
+        this.more = more;
+        this.size = size;
+    }
+
+    public Product(int id, String name, String nameCategory, String image, float price, int countFeedback, String more) {
         this.id = id;
         this.name = name;
         this.nameCategory = nameCategory;
@@ -30,7 +41,7 @@ public class Product implements Serializable {
         this.more = more;
     }
 
-    public Product(int id, String name, String nameCategory, String image, float price, float start, String size, String color) {
+    public Product(int id, String name, String nameCategory, String image, float price, float start, int size, String color) {
         this.id = id;
         this.name = name;
         this.nameCategory = nameCategory;
@@ -93,11 +104,11 @@ public class Product implements Serializable {
         this.start = start;
     }
 
-    public String getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(int size) {
         this.size = size;
     }
 

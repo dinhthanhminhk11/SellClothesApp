@@ -1,7 +1,7 @@
 package com.example.sellclothesapp.ui.fragment;
 
-import static com.example.sellclothesapp.ui.fragment.HomeFragment.productsList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +12,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sellclothesapp.dao.Controller;
 import com.example.sellclothesapp.databinding.FragmentCartBinding;
+import com.example.sellclothesapp.model.Card;
 import com.example.sellclothesapp.model.Product;
+import com.example.sellclothesapp.model.User;
+import com.example.sellclothesapp.ui.activity.PaymentActivity;
 import com.example.sellclothesapp.ui.adapter.CardAdapter;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,7 +35,7 @@ public class CartFragment extends Fragment implements CardAdapter.Callback {
     private DecimalFormat decimalFormat = new DecimalFormat("#.#");
     private FragmentCartBinding binding;
     private CardAdapter cardAdapter;
-
+    private Controller controller;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -85,10 +90,29 @@ public class CartFragment extends Fragment implements CardAdapter.Callback {
     }
 
     private void initView() {
+        controller = new Controller(getActivity());
+
+        List<Product> listProduct = controller.getListProductByCardUserId(User.getInstance().getId());
+
         binding.listCard.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        cardAdapter = new CardAdapter(productsList);
+        cardAdapter = new CardAdapter(listProduct);
         cardAdapter.setCallback(this);
         binding.listCard.setAdapter(cardAdapter);
+
+        if (listProduct.size() > 0) {
+            binding.conentNotNull.setVisibility(View.VISIBLE);
+            binding.contentNullCard.setVisibility(View.GONE);
+        } else {
+            binding.conentNotNull.setVisibility(View.GONE);
+            binding.contentNullCard.setVisibility(View.VISIBLE);
+        }
+
+        binding.sumit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), PaymentActivity.class));
+            }
+        });
     }
 
     @Override

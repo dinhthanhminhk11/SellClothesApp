@@ -1,5 +1,6 @@
 package com.example.sellclothesapp.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.example.sellclothesapp.databinding.ItemSizeBinding;
 import com.example.sellclothesapp.model.Size;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class SizeAdapter extends RecyclerView.Adapter<SizeAdapter.ViewHolder> {
     private List<Size> data;
@@ -20,8 +22,14 @@ public class SizeAdapter extends RecyclerView.Adapter<SizeAdapter.ViewHolder> {
     private boolean selected = true;
     private boolean check = true;
 
+    private Consumer<Integer> callBack;
+
     public SizeAdapter(List<Size> data) {
         this.data = data;
+    }
+
+    public void setCallBack(Consumer<Integer> callBack) {
+        this.callBack = callBack;
     }
 
     @NonNull
@@ -31,10 +39,10 @@ public class SizeAdapter extends RecyclerView.Adapter<SizeAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SizeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SizeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Size size = data.get(position);
-        if(size !=null){
-            holder.binding.name.setText(size.getName());
+        if (size != null) {
+            holder.binding.name.setText(String.valueOf(size.getName()));
 
             if (selected) {
                 if (position == 0) {
@@ -57,6 +65,7 @@ public class SizeAdapter extends RecyclerView.Adapter<SizeAdapter.ViewHolder> {
                 public void onClick(View view) {
                     row_index = position;
                     notifyDataSetChanged();
+                    callBack.accept(size.getName());
                 }
             });
         }

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.sellclothesapp.constants.AppConstant;
 import com.example.sellclothesapp.database.MySqlHelper;
 import com.example.sellclothesapp.model.Bookmark;
+import com.example.sellclothesapp.model.Card;
 import com.example.sellclothesapp.model.Product;
 import com.example.sellclothesapp.model.User;
 
@@ -90,7 +91,7 @@ public class Controller {
 
     public Product getProductById(int id) {
         this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
-        String sql = "select * from " + AppConstant.TABLE_PRODUCT + " where " + AppConstant.PRODUCT_ID + "=' " + id + "'";
+        String sql = "select * from " + AppConstant.TABLE_PRODUCT + " where " + AppConstant.PRODUCT_ID + "='" + id + "'";
         Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
         Product product = null;
         if (cursor.moveToFirst()) {
@@ -153,7 +154,7 @@ public class Controller {
 
     public Bookmark getBookmarkByIdUserAndIdProduct(int idProduct, int idUser) {
         this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
-        String sql = "select * from " + AppConstant.TABLE_BOOKMARK + " where " + AppConstant.BOOKMARK_ID_PRODUCT + "=' " + idProduct + "' and " + AppConstant.BOOKMARK_ID_USER + "='" + idUser + "'";
+        String sql = "select * from " + AppConstant.TABLE_BOOKMARK + " where " + AppConstant.BOOKMARK_ID_PRODUCT + "='" + idProduct + "' and " + AppConstant.BOOKMARK_ID_USER + "='" + idUser + "'";
         Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
         Bookmark bookmark = null;
         if (cursor.moveToFirst()) {
@@ -164,6 +165,73 @@ public class Controller {
         cursor.close();
         this.sqLiteDatabase.close();
         return bookmark;
+    }
+
+    public Card getCardByUserId(int idProduct, int idUser) {
+        this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
+        String sql = "select * from " + AppConstant.TABLE_CARD + " where " + AppConstant.CARD_ID_PRODUCT + "='" + idProduct + "' and " + AppConstant.CARD_ID_USER + "='" + idUser + "'";
+        Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
+        Card card = null;
+        if (cursor.moveToFirst()) {
+            card = new Card(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4));
+        }
+        cursor.close();
+        this.sqLiteDatabase.close();
+        return card;
+    }
+
+    public boolean addToCard(Card card) {
+        this.sqLiteDatabase = mySqlHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AppConstant.CARD_ID_USER, card.getIdUser());
+        contentValues.put(AppConstant.CARD_ID_PRODUCT, card.getIdProduct());
+        contentValues.put(AppConstant.CARD_SIZE, card.getSize());
+        contentValues.put(AppConstant.CARD_QUALITY, card.getQuality());
+        long result = this.sqLiteDatabase.insert(AppConstant.TABLE_CARD, null, contentValues);
+        return result > 0;
+    }
+
+    public boolean deleteCard(int id) {
+        this.sqLiteDatabase = mySqlHelper.getWritableDatabase();
+        return sqLiteDatabase.delete(AppConstant.TABLE_CARD, AppConstant.CARD_ID + "=?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    //int id, int idUser, int idProduct, int size, int quality
+    public List<Card> getAllListCardByUserId(int id) {
+        List<Card> list = new ArrayList<>();
+        this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
+        String sql = "select * from " + AppConstant.TABLE_CARD + " where " + AppConstant.CARD_ID_USER + " ='" + id + "'";
+        Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
+        Card card;
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                card = new Card(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4));
+                list.add(card);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        this.sqLiteDatabase.close();
+        return list;
+    }
+
+    public List<Product> getListProductByCardUserId(int id) {
+        List<Product> list = new ArrayList<>();
+        this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
+        String sql = "select * from " + AppConstant.TABLE_CARD + " where " + AppConstant.CARD_ID_USER + " ='" + id + "'";
+        Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
+        Product product;
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                product = getProductById(cursor.getInt(2));
+                product.setSize(cursor.getInt(3));
+                list.add(product);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        this.sqLiteDatabase.close();
+        return list;
     }
 
 }

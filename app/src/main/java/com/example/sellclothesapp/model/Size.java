@@ -2,9 +2,9 @@ package com.example.sellclothesapp.model;
 
 public class Size {
     private int id;
-    private String name;
+    private int name;
 
-    public Size(int id, String name) {
+    public Size(int id, int name) {
         this.id = id;
         this.name = name;
     }
@@ -13,7 +13,7 @@ public class Size {
         return id;
     }
 
-    public String getName() {
+    public int getName() {
         return name;
     }
 }

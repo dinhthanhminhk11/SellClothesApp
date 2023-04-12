@@ -108,7 +108,7 @@ public class FavouriteFragment extends Fragment implements ProductAdapter.Callba
 
     @Override
     public void deleteBookmark(int id) {
-        controller.addBookmark(new Bookmark(0, id, User.getInstance().getId()));
+        controller.deleteBookmark(id);
     }
 
     @Override

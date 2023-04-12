@@ -14,7 +14,7 @@ public class MySqlHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sql = "create table " + AppConstant.TABLE_USER + "(" +
-                AppConstant.USER_ID + " integer primary key, " +
+                AppConstant.USER_ID + " integer primary key AUTOINCREMENT, " +
                 AppConstant.USER_NAME + " text not null," +
                 AppConstant.USER_EMAIL + " text not null," +
                 AppConstant.USER_PHONE + " text not null," +
@@ -23,7 +23,7 @@ public class MySqlHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql);
 
         sql = "create table " + AppConstant.TABLE_PRODUCT + "(" +
-                AppConstant.PRODUCT_ID + " integer primary key, " +
+                AppConstant.PRODUCT_ID + " integer primary key AUTOINCREMENT, " +
                 AppConstant.PRODUCT_ID_CATEGORY + " integer not null, " +
                 AppConstant.PRODUCT_NAME + " text not null, " +
                 AppConstant.PRODUCT_COUNT_FEEDBACK + " integer not null, " +
@@ -33,9 +33,18 @@ public class MySqlHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql);
 
         sql = "create table " + AppConstant.TABLE_BOOKMARK + "(" +
-                AppConstant.BOOKMARK_ID + " integer primary key, " +
+                AppConstant.BOOKMARK_ID + " integer primary key AUTOINCREMENT, " +
                 AppConstant.BOOKMARK_ID_USER + " integer not null, " +
                 AppConstant.BOOKMARK_ID_PRODUCT + " integer not null" +
+                ")";
+        sqLiteDatabase.execSQL(sql);
+
+        sql = "create table " + AppConstant.TABLE_CARD + "(" +
+                AppConstant.CARD_ID + " integer primary key AUTOINCREMENT, " +
+                AppConstant.CARD_ID_USER + " integer not null, " +
+                AppConstant.CARD_ID_PRODUCT + " integer not null," +
+                AppConstant.CARD_SIZE + " integer not null," +
+                AppConstant.CARD_QUALITY + " integer not null" +
                 ")";
         sqLiteDatabase.execSQL(sql);
 

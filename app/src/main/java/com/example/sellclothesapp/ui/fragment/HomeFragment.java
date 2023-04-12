@@ -31,9 +31,7 @@ import java.util.function.Consumer;
 
 public class HomeFragment extends Fragment implements CategoryAdapter.Callback, ProductAdapter.Callback {
     private FragmentHomeBinding binding;
-
     private List<Category> categoryList;
-    public static List<Product> productsList;
     private Controller controller;
     private ProductAdapter productAdapter;
 
@@ -74,21 +72,11 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Callback, 
         categoryList.add(new Category(1, "Váy", R.drawable.dress_svgrepo_com));
         categoryList.add(new Category(1, "Đầm", R.drawable.dress_svgrepo_com__1_));
 
-
-        productsList = new ArrayList<>();
-        productsList.add(new Product(1, "áo thun 1", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
-        productsList.add(new Product(1, "áo thun 2", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
-        productsList.add(new Product(1, "áo thun 3", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
-        productsList.add(new Product(1, "áo thun 4", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
-        productsList.add(new Product(1, "áo thun 5", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
-        productsList.add(new Product(1, "áo thun 6", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
-        productsList.add(new Product(1, "áo thun 7", "Áo", "https://sixdo.vn/images/products/2023/large/vnq09911-1679761237.jpg", 12.3f, 5.0f, "L", "Black"));
-
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList, this);
         binding.listCategoryHomeFragment.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         binding.listCategoryHomeFragment.setAdapter(categoryAdapter);
 
-        productAdapter = new ProductAdapter(getActivity(),new Consumer<Product>() {
+        productAdapter = new ProductAdapter(getActivity(), new Consumer<Product>() {
             @Override
             public void accept(Product product) {
                 Intent intent = new Intent(getActivity(), DetailProductActivity.class);
@@ -122,7 +110,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Callback, 
 
     @Override
     public void deleteBookmark(int id) {
-        controller.addBookmark(new Bookmark(0, id, User.getInstance().getId()));
+        controller.deleteBookmark(id);
     }
 
     @Override

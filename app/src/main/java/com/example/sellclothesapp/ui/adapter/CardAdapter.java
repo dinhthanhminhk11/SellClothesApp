@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.sellclothesapp.R;
 import com.example.sellclothesapp.databinding.ItemCardBinding;
 import com.example.sellclothesapp.model.Product;
 
@@ -45,9 +48,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         Product item = data.get(position);
         if (item != null) {
             holder.itemCardBinding.nameUser.setText(item.getName());
-            holder.itemCardBinding.content.setText("Size: " + item.getSize() + " | " + "Màu: " + item.getColor());
+            holder.itemCardBinding.content.setText("Size: " + item.getSize() );
             holder.itemCardBinding.price.setText(decimalFormat.format(item.getPrice()) + " $");
-
+            RequestOptions options = new RequestOptions().centerCrop().placeholder(R.drawable.img).error(R.drawable.img);
+            Glide.with(holder.itemCardBinding.image.getContext()).load(item.getImage()).apply(options).dontAnimate().into(holder.itemCardBinding.image);
 
             holder.itemCardBinding.down.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("NotifyDataSetChanged")

@@ -163,14 +163,16 @@
                 android:layout_marginTop="8dp"
                 android:text="Màu"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listColor"
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never" />
+                android:layout_marginTop="8dp"
+                android:overScrollMode="never"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -182,9 +184,9 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listSize"
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:overScrollMode="never" />
 
             <TextView

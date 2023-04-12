@@ -28,6 +28,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private DecimalFormat decimalFormat = new DecimalFormat("#.#");
     private boolean isClickSpeed = true;
     private Controller controller;
+    private Bookmark bookmark;
 
     public ProductAdapter(Context context, Consumer<Product> consumer, Callback callback) {
         this.consumer = consumer;
@@ -64,7 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 }
             });
 
-            Bookmark bookmark = controller.getBookmarkByIdUserAndIdProduct(product.getId(), User.getInstance().getId());
+            bookmark = controller.getBookmarkByIdUserAndIdProduct(product.getId(), User.getInstance().getId());
             if (bookmark != null) {
                 holder.itemProductBinding.imageFavorite.setImageResource(R.drawable.ic_favorite_full);
                 isClickSpeed = false;
@@ -81,9 +82,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         holder.itemProductBinding.imageFavorite.setImageResource(R.drawable.ic_favorite_full);
                         isClickSpeed = false;
                     } else {
-                        callback.deleteBookmark(product.getId());
-                        holder.itemProductBinding.imageFavorite.setImageResource(R.drawable.ic_favorite_border_24);
-                        isClickSpeed = true;
+                        if (bookmark != null) {
+                            callback.deleteBookmark(bookmark.getId());
+                            holder.itemProductBinding.imageFavorite.setImageResource(R.drawable.ic_favorite_border_24);
+                            isClickSpeed = true;
+                        }
                     }
                 }
             });
