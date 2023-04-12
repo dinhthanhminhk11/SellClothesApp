@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sellclothesapp.constants.AppConstant;
 import com.example.sellclothesapp.database.MySqlHelper;
+import com.example.sellclothesapp.model.Bill;
+import com.example.sellclothesapp.model.BillInFo;
 import com.example.sellclothesapp.model.Bookmark;
 import com.example.sellclothesapp.model.Card;
 import com.example.sellclothesapp.model.Product;
@@ -216,6 +218,50 @@ public class Controller {
     }
 
     public List<Product> getListProductByCardUserId(int id) {
+        List<Product> list = new ArrayList<>();
+        this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
+        String sql = "select * from " + AppConstant.TABLE_CARD + " where " + AppConstant.CARD_ID_USER + " ='" + id + "'";
+        Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
+        Product product;
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                product = getProductById(cursor.getInt(2));
+                product.setSize(cursor.getInt(3));
+                list.add(product);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        this.sqLiteDatabase.close();
+        return list;
+    }
+
+    public boolean addBill(Bill bill) {
+        this.sqLiteDatabase = mySqlHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AppConstant.BILL_ID, bill.getId());
+        contentValues.put(AppConstant.BILL_ID_USER, bill.getIdUser());
+        contentValues.put(AppConstant.BILL_NAME_USER, bill.getNameUser());
+        contentValues.put(AppConstant.BILL_PHONE_USER, bill.getPhoneUser());
+        contentValues.put(AppConstant.BILL_ADDRESS_USER, bill.getAddress());
+        contentValues.put(AppConstant.BILL_PAYMENT, bill.getPayment());
+        contentValues.put(AppConstant.BILL_PRICE, bill.getSum());
+        long result = this.sqLiteDatabase.insert(AppConstant.TABLE_BILL, null, contentValues);
+        return result > 0;
+    }
+
+    public boolean addBillInfo(BillInFo billInFo) {
+        this.sqLiteDatabase = mySqlHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AppConstant.BILL_INFO_ID_BILL, billInFo.getIdBill());
+        contentValues.put(AppConstant.BILL_INFO_ID_USER, billInFo.getIdUser());
+        contentValues.put(AppConstant.BILL_INFO_ID_PRODUCT, billInFo.getIdProduct());
+        contentValues.put(AppConstant.BILL_INFO_COUNT_PRODUCT, billInFo.getCountProduct());
+        long result = this.sqLiteDatabase.insert(AppConstant.TABLE_BILL_INFO, null, contentValues);
+        return result > 0;
+    }
+
+    public List<Product> getBillByIdUser(int id) {
         List<Product> list = new ArrayList<>();
         this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
         String sql = "select * from " + AppConstant.TABLE_CARD + " where " + AppConstant.CARD_ID_USER + " ='" + id + "'";

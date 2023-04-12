@@ -22,6 +22,12 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
     private boolean check = true;
     private List<Payment> data;
 
+    private Callback callback;
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
+
     public PaymentAdapter(List<Payment> data) {
         this.data = data;
     }
@@ -63,6 +69,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
                 public void onClick(View view) {
                     row_index = position;
                     notifyDataSetChanged();
+                    callback.callbackPosition(position);
                 }
             });
         }
@@ -80,5 +87,9 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
             super(binding.getRoot());
             this.itemCategoryHomefragmentBinding = binding;
         }
+    }
+
+    public interface Callback {
+        void callbackPosition(int id);
     }
 }

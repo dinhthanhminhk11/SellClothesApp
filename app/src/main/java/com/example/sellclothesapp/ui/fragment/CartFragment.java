@@ -12,9 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sellclothesapp.constants.AppConstant;
 import com.example.sellclothesapp.dao.Controller;
 import com.example.sellclothesapp.databinding.FragmentCartBinding;
-import com.example.sellclothesapp.model.Card;
 import com.example.sellclothesapp.model.Product;
 import com.example.sellclothesapp.model.User;
 import com.example.sellclothesapp.ui.activity.PaymentActivity;
@@ -40,7 +40,7 @@ public class CartFragment extends Fragment implements CardAdapter.Callback {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private HashMap<Product, Integer> cartMap;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -110,7 +110,9 @@ public class CartFragment extends Fragment implements CardAdapter.Callback {
         binding.sumit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PaymentActivity.class));
+                Intent intent = new Intent(getActivity(), PaymentActivity.class);
+                intent.putExtra(AppConstant.CARD_MAP, cartMap);
+                startActivity(intent);
             }
         });
     }
@@ -122,6 +124,7 @@ public class CartFragment extends Fragment implements CardAdapter.Callback {
 
     @Override
     public void callSum(HashMap<Product, Integer> cartMap) {
+        this.cartMap = cartMap;
         binding.countCard.setText("Mặt hàng (" + cartMap.size() + " mặt hàng)");
         double sum = 0;
         Set<Map.Entry<Product, Integer>> entries = cartMap.entrySet();
@@ -130,9 +133,7 @@ public class CartFragment extends Fragment implements CardAdapter.Callback {
             Integer value = entry.getValue();
             sum += (key.getPrice() * value);
         }
-
         binding.countCardPrice.setText(decimalFormat.format(sum) + " $");
         binding.sumPrice.setText(decimalFormat.format(sum + (sum * 0.1)) + " $");
-
     }
 }

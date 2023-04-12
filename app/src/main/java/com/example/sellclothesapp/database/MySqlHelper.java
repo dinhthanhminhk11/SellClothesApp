@@ -48,6 +48,26 @@ public class MySqlHelper extends SQLiteOpenHelper {
                 ")";
         sqLiteDatabase.execSQL(sql);
 
+        sql = "create table " + AppConstant.TABLE_BILL + "(" +
+                AppConstant.BILL_ID + " integer primary key, " +
+                AppConstant.BILL_ID_USER + " integer not null, " +
+                AppConstant.BILL_NAME_USER + " text not null," +
+                AppConstant.BILL_PHONE_USER + " text not null," +
+                AppConstant.BILL_ADDRESS_USER + " text not null," +
+                AppConstant.BILL_PAYMENT + " integer not null," +
+                AppConstant.BILL_PRICE + " integer not null" +
+                ")";
+        sqLiteDatabase.execSQL(sql);
+
+        sql = "create table " + AppConstant.TABLE_BILL_INFO + "(" +
+                AppConstant.BILL_INFO_ID + " integer primary key AUTOINCREMENT, " +
+                AppConstant.BILL_INFO_ID_BILL + " integer not null, " +
+                AppConstant.BILL_INFO_ID_USER + " integer not null," +
+                AppConstant.BILL_INFO_ID_PRODUCT + " integer not null," +
+                AppConstant.BILL_INFO_COUNT_PRODUCT + " integer not null" +
+                ")";
+        sqLiteDatabase.execSQL(sql);
+
 // váy là id là 3
         // áo là 1
         // quần là 2
