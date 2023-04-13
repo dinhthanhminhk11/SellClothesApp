@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -110,9 +111,13 @@ public class CartFragment extends Fragment implements CardAdapter.Callback {
         binding.sumit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PaymentActivity.class);
-                intent.putExtra(AppConstant.CARD_MAP, cartMap);
-                startActivity(intent);
+                if (cartMap != null) {
+                    Intent intent = new Intent(getActivity(), PaymentActivity.class);
+                    intent.putExtra(AppConstant.CARD_MAP, cartMap);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), "Vui lòng chọn số lượng đơn hàng", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

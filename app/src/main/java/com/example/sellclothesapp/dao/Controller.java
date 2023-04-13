@@ -261,17 +261,16 @@ public class Controller {
         return result > 0;
     }
 
-    public List<Product> getBillByIdUser(int id) {
-        List<Product> list = new ArrayList<>();
+    public List<Bill> getBillByIdUser(int id) {
+        List<Bill> list = new ArrayList<>();
         this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
-        String sql = "select * from " + AppConstant.TABLE_CARD + " where " + AppConstant.CARD_ID_USER + " ='" + id + "'";
+        String sql = "select * from " + AppConstant.TABLE_BILL + " where " + AppConstant.BILL_ID_USER + " ='" + id + "'";
         Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
-        Product product;
+        Bill bill;
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                product = getProductById(cursor.getInt(2));
-                product.setSize(cursor.getInt(3));
-                list.add(product);
+                bill = new Bill(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), cursor.getInt(6));
+                list.add(bill);
                 cursor.moveToNext();
             }
         }
@@ -280,4 +279,22 @@ public class Controller {
         return list;
     }
 
+    public List<Product> getListProductByListBillAndIdUser(int idUser, int idBill) {
+        List<Product> list = new ArrayList<>();
+        this.sqLiteDatabase = mySqlHelper.getReadableDatabase();
+        String sql = "select * from " + AppConstant.TABLE_BILL_INFO + " where " + AppConstant.BILL_INFO_ID_USER + " ='" + idUser + "' and " + AppConstant.BILL_INFO_ID_BILL + "='" + idBill + "'";
+        Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
+        Product product;
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                product = getProductById(cursor.getInt(3));
+                product.setCountProduct(cursor.getInt(4));
+                list.add(product);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        this.sqLiteDatabase.close();
+        return list;
+    }
 }

@@ -1,10 +1,12 @@
 package com.example.sellclothesapp.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sellclothesapp.MainActivity;
 import com.example.sellclothesapp.databinding.ActivityOrderSuccessBinding;
 
 public class OrderSuccessActivity extends AppCompatActivity {
@@ -25,7 +27,10 @@ public class OrderSuccessActivity extends AppCompatActivity {
         binding.sumit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent= new Intent(OrderSuccessActivity.this , MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }

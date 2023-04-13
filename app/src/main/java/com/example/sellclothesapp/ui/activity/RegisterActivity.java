@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sellclothesapp.MainActivity;
 import com.example.sellclothesapp.dao.Controller;
 import com.example.sellclothesapp.databinding.ActivityRegisterBinding;
 import com.example.sellclothesapp.model.User;
@@ -63,13 +62,8 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             User user = new User(0, binding.name.getText().toString(), binding.email.getText().toString(), binding.phone.getText().toString(), binding.password.getText().toString(), binding.address.getText().toString());
             if (controller.registerUser(user)) {
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                User user1 = User.getInstance();
-                user1.setName(user.getName());
-                user1.setEmail(user.getEmail());
-                user1.setPhone(user.getPhone());
-                user1.setAddress(user.getAddress());
-                user1.setId(user.getId());
+                Toast.makeText(this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             } else {
                 Toast.makeText(this, "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
             }

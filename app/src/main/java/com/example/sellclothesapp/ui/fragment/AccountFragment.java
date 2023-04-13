@@ -1,5 +1,6 @@
 package com.example.sellclothesapp.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.sellclothesapp.databinding.FragmentAccountBinding;
+import com.example.sellclothesapp.model.User;
+import com.example.sellclothesapp.ui.activity.YourOrderActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,6 +63,13 @@ public class AccountFragment extends Fragment {
     }
 
     private void initView() {
-
+        binding.nameUser.setText(User.getInstance().getName());
+        binding.btnYourOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), YourOrderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

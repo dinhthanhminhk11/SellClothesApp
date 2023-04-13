@@ -17,6 +17,8 @@ public class Product implements Serializable {
     private int countFeedback;
     private String more;
 
+    private int countProduct;
+
     public Product() {
     }
 
@@ -118,5 +120,13 @@ public class Product implements Serializable {
 
     public String getMore() {
         return more;
+    }
+
+    public int getCountProduct() {
+        return countProduct;
+    }
+
+    public void setCountProduct(int countProduct) {
+        this.countProduct = countProduct;
     }
 }
