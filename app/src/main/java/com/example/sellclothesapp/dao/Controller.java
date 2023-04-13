@@ -63,7 +63,7 @@ public class Controller {
         Product product;
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(1)) == 1 ? "Áo" : Integer.parseInt(cursor.getString(1)) == 2 ? "Quần" : Integer.parseInt(cursor.getString(1)) == 3 ? "Váy" : "Đầm", cursor.getString(6), cursor.getInt(4), cursor.getInt(3), cursor.getString(5));
+                product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(1)) == 1 ? "Biti’s" : Integer.parseInt(cursor.getString(1)) == 2 ? "Ananas" : Integer.parseInt(cursor.getString(1)) == 3 ? "RIENEVAN" : "MIDAZ", cursor.getString(6), cursor.getInt(4), cursor.getInt(3), cursor.getString(5));
                 list.add(product);
                 cursor.moveToNext();
             }
@@ -81,7 +81,7 @@ public class Controller {
         Product product;
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(1)) == 1 ? "Áo" : Integer.parseInt(cursor.getString(1)) == 2 ? "Quần" : Integer.parseInt(cursor.getString(1)) == 3 ? "Váy" : "Đầm", cursor.getString(6), cursor.getInt(4), cursor.getInt(3), cursor.getString(5));
+                product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(1)) == 1 ? "Biti’s" : Integer.parseInt(cursor.getString(1)) == 2 ? "Ananas" : Integer.parseInt(cursor.getString(1)) == 3 ? "RIENEVAN" : "MIDAZ", cursor.getString(6), cursor.getInt(4), cursor.getInt(3), cursor.getString(5));
                 list.add(product);
                 cursor.moveToNext();
             }
@@ -97,7 +97,7 @@ public class Controller {
         Cursor cursor = this.sqLiteDatabase.rawQuery(sql, null);
         Product product = null;
         if (cursor.moveToFirst()) {
-            product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(1)) == 1 ? "Áo" : Integer.parseInt(cursor.getString(1)) == 2 ? "Quần" : Integer.parseInt(cursor.getString(1)) == 3 ? "Váy" : "Đầm", cursor.getString(6), cursor.getInt(4), cursor.getInt(3), cursor.getString(5));
+            product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(2), Integer.parseInt(cursor.getString(1)) == 1 ? "Biti’s" : Integer.parseInt(cursor.getString(1)) == 2 ? "Ananas" : Integer.parseInt(cursor.getString(1)) == 3 ? "RIENEVAN" : "MIDAZ", cursor.getString(6), cursor.getInt(4), cursor.getInt(3), cursor.getString(5));
         }
         cursor.close();
         this.sqLiteDatabase.close();

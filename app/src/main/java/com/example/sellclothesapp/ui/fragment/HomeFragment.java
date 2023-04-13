@@ -67,10 +67,10 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Callback, 
     private void initView() {
         categoryList = new ArrayList<>();
         categoryList.add(new Category(1, "Tất cả", R.drawable.ic_all_item));
-        categoryList.add(new Category(1, "Áo", R.drawable.shirt_sleeveless_svgrepo_com));
-        categoryList.add(new Category(1, "Quần", R.drawable.trousers_svgrepo_com));
-        categoryList.add(new Category(1, "Váy", R.drawable.dress_svgrepo_com));
-        categoryList.add(new Category(1, "Đầm", R.drawable.dress_svgrepo_com__1_));
+        categoryList.add(new Category(1, "Biti’s", R.drawable.shirt_sleeveless_svgrepo_com));
+        categoryList.add(new Category(1, "Ananas", R.drawable.trousers_svgrepo_com));
+        categoryList.add(new Category(1, "RIENEVAN", R.drawable.dress_svgrepo_com));
+        categoryList.add(new Category(1, "MIDAZ", R.drawable.dress_svgrepo_com__1_));
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList, this);
         binding.listCategoryHomeFragment.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));

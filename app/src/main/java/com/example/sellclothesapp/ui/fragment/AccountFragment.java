@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sellclothesapp.databinding.FragmentAccountBinding;
 import com.example.sellclothesapp.model.User;
+import com.example.sellclothesapp.ui.activity.LoginActivity;
 import com.example.sellclothesapp.ui.activity.YourOrderActivity;
 
 /**
@@ -68,6 +69,14 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), YourOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.btnEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
         });
