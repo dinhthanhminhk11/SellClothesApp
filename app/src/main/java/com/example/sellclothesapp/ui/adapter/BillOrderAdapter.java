@@ -40,7 +40,7 @@ public class BillOrderAdapter extends RecyclerView.Adapter<BillOrderAdapter.View
             holder.binding.address.setText(bill.getAddress());
             holder.binding.nameUser.setText(bill.getNameUser());
             holder.binding.phone.setText(bill.getPhoneUser());
-
+            holder.binding.price.setText(bill.getSum() +"$");
             holder.binding.btnDown.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
